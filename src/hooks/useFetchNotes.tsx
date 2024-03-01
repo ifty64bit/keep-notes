@@ -22,7 +22,7 @@ const useFetchNotes = () => {
 
     useEffect(() => {
         fetchNotes();
-    }, []);
+    }, [fetchNotes]);
 
     const invalidate = async () => {
         // Reset state

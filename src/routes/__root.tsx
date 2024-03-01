@@ -8,7 +8,7 @@ export const Route = createRootRouteWithContext()({
         <>
             <Outlet />
             <ToastContainer />
-            //Check vite env and only show devtools in development
+            {/* Check vite env and only show devtools in development */}
             {import.meta.env.DEV && <TanStackRouterDevtools />}
         </>
     ),

@@ -35,7 +35,7 @@ function Signup() {
     }
 
     return (
-        <section className="flex gap-10 justify-center items-center min-h-screen">
+        <section className="flex flex-col md:flex-row gap-10 justify-center items-center min-h-screen">
             <h3 className="text-5xl font-bold">Create Account!</h3>
             <div>
                 <form
