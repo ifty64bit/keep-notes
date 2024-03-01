@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.has-submenu {
+}
+
+.has-submenu ul {
+    transition-property: opacity, transform, visibility, color;
+    transition-duration: 0.4s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.has-submenu:hover ul {
+    visibility: visible;
+    opacity: 1;
+}
