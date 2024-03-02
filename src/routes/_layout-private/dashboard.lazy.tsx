@@ -7,17 +7,28 @@ import { createPortal } from "react-dom";
 import NoteCard from "../../components/NoteCard";
 import NoteContainer from "../../components/NoteContainer";
 import useFetchNotes from "../../hooks/useFetchNotes";
+import { toast } from "react-toastify";
 
 export const Route = createLazyFileRoute("/_layout-private/dashboard")({
     component: Dashboard,
 });
 
 function Dashboard() {
-    const { notes, isLoading, invalidate } = useFetchNotes();
+    const { notes, isLoading } = useFetchNotes();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState<Note | undefined>(
         undefined
     );
+
+    function handleDialogClose() {
+        setIsDialogOpen(false);
+        setSelectedNote(undefined);
+    }
+
+    function handleDeleteNote(note: Note) {
+        deleteNoteById(note.id as string);
+        toast.success("Note deleted successfully");
+    }
 
     async function handleNoteUpdate(content: Note) {
         //If empty note, return
@@ -35,7 +46,9 @@ function Dashboard() {
             content: content.content,
             bgColor: content.bgColor,
         });
-        invalidate();
+        toast.success(
+            content.id ? "Note updated successfully" : "Note added successfully"
+        );
     }
 
     return (
@@ -63,10 +76,7 @@ function Dashboard() {
                                     setSelectedNote(note);
                                     setIsDialogOpen(true);
                                 }}
-                                handleDelete={() => {
-                                    deleteNoteById(note.id as string);
-                                    invalidate();
-                                }}
+                                handleDelete={() => handleDeleteNote(note)}
                             />
                         ))
                     )}
@@ -76,7 +86,7 @@ function Dashboard() {
                 createPortal(
                     <Dialog
                         note={selectedNote}
-                        handleDialogClose={setIsDialogOpen}
+                        handleDialogClose={handleDialogClose}
                         handleNoteUpdate={handleNoteUpdate}
                     />,
                     document.getElementById("portal") as HTMLElement

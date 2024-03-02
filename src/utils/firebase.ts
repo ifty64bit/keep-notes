@@ -7,6 +7,7 @@ import {
     doc,
     getDocs,
     getFirestore,
+    onSnapshot,
     query,
     setDoc,
 } from "firebase/firestore";
@@ -107,6 +108,22 @@ export async function getAllNotesOfUser() {
     const notes = await getDocs(q);
 
     return notes.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as Note[];
+}
+
+export function subscribeToNotesOfUser(
+    callback: (notes: Note[]) => void
+) {
+    const q = query(
+        collection(db, "notes", auth.currentUser?.uid as string, "userNotes")
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const notes = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        })) as Note[];
+        callback(notes);
+    });
+    return unsubscribe;
 }
 
 export async function saveOrUpdateNote({ id, title, content, bgColor }: Note) {

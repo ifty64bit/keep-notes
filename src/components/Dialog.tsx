@@ -2,35 +2,41 @@ import { useState } from "react";
 import getRandomColor from "../assets/colors";
 
 type Props = {
-    handleDialogClose: (value: boolean) => void;
+    handleDialogClose: () => void;
     handleNoteUpdate: (content: Note) => void;
     note?: Note;
 };
 
 const backgroundColor = getRandomColor();
 
+const initalNote = {
+    id: "",
+    title: "",
+    content: "",
+    bgColor: backgroundColor,
+};
+
 function Dialog({ note, handleDialogClose, handleNoteUpdate }: Props) {
-    const [content, setContent] = useState(
-        note || { title: "", content: "", bgColor: backgroundColor }
-    );
+    const [content, setContent] = useState(note || initalNote);
+
+    function close() {
+        handleNoteUpdate({
+            ...content,
+            bgColor: backgroundColor,
+        });
+        handleDialogClose();
+        setContent(initalNote);
+    }
 
     function ifClickedOutside(e: React.MouseEvent<HTMLDivElement>) {
         if (e.target === e.currentTarget) {
-            handleNoteUpdate({
-                ...content,
-                bgColor: backgroundColor,
-            });
-            handleDialogClose(false);
+            close();
         }
     }
 
     function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        handleNoteUpdate({
-            ...content,
-            bgColor: backgroundColor,
-        });
-        handleDialogClose(false);
+        close();
     }
 
     return (
@@ -63,6 +69,14 @@ function Dialog({ note, handleDialogClose, handleNoteUpdate }: Props) {
                         setContent({ ...content, content: e.target.value })
                     }
                 />
+                <div className="flex justify-end">
+                    <button
+                        className="text-sm hover:bg-slate-300 transition-colors rounded p-1"
+                        onClick={close}
+                    >
+                        Close
+                    </button>
+                </div>
             </form>
         </div>
     );

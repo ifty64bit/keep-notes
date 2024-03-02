@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getAllNotesOfUser } from "../utils/firebase";
+import { getAllNotesOfUser, subscribeToNotesOfUser } from "../utils/firebase";
 
 const useFetchNotes = () => {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -21,28 +21,34 @@ const useFetchNotes = () => {
     }, []);
 
     useEffect(() => {
-        fetchNotes();
+        //Subscribe to note snapshot
+        const unsubscribe = subscribeToNotesOfUser((notes) => {
+            setNotes(notes);
+        });
+        return () => {
+            unsubscribe();
+        };
     }, [fetchNotes]);
 
-    const invalidate = async () => {
-        // Reset state
-        setNotes([]);
-        setIsLoading(true);
-        setError(null);
-        try {
-            // Fetch fresh data
-            const data = await getAllNotesOfUser();
-            setNotes(data);
-        } catch (error) {
-            // Type assertion (not recommended, use type guards instead)
-            const typedError = error as Error;
-            setError(typedError.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    // const invalidate = async () => {
+    //     // Reset state
+    //     setNotes([]);
+    //     setIsLoading(true);
+    //     setError(null);
+    //     try {
+    //         // Fetch fresh data
+    //         const data = await getAllNotesOfUser();
+    //         setNotes(data);
+    //     } catch (error) {
+    //         // Type assertion (not recommended, use type guards instead)
+    //         const typedError = error as Error;
+    //         setError(typedError.message);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
 
-    return { notes, isLoading, error, invalidate };
+    return { notes, isLoading, error };
 };
 
 export default useFetchNotes;
