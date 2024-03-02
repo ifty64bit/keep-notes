@@ -92,7 +92,7 @@ function Dashboard() {
                     document.getElementById("portal") as HTMLElement
                 )}
             <Add
-                className="absolute right-4 bottom-4 hover:bg-slate-200 transition-colors rounded-full"
+                className="absolute right-4 bottom-4 hover:bg-slate-200 hover:dark:bg-slate-900 rounded-full hover:shadow-md hover:-translate-y-2 cursor-pointer transition-colors transition-transform transition-shadow"
                 onClick={() => setIsDialogOpen(true)}
             />
         </section>

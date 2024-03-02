@@ -8,7 +8,7 @@ type Props = {
 function NoteCard({ title, content, bgColor, onClick, handleDelete }: Props) {
     return (
         <div
-            className="max-w-56 min-w-52 min-h-16 p-2 rounded-md shadow-md cursor-pointer transition-shadow hover:shadow-lg "
+            className="max-w-56 min-w-52 min-h-16 p-2 rounded-md shadow-md cursor-pointer transition-shadow hover:shadow-lg text-black"
             style={{ backgroundColor: bgColor }}
             onClick={onClick}
         >

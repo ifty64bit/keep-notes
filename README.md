@@ -1,6 +1,8 @@
 # Keep Note
 
-## Next Improvement
+## Features
 
--   Show toast for every operation
--   Make optimistic update
+-   Create, Save, Update, Delete Note
+-   Optimistic Update with firebase realtime snapshot
+-   Email/Google Outh login
+-   Dark Mode

@@ -5,6 +5,10 @@
 @layer base {
     html {
         font-family: "Poppins", "System-ui";
+        @apply dark:bg-[#0C2D57] dark:text-white;
+    }
+    input[type="password"] {
+        @apply dark:text-black;
     }
 }
 

@@ -5,7 +5,7 @@ function Header() {
     const navigate = useNavigate();
     const user = auth.currentUser;
     return (
-        <header className="h-20 px-5 flex justify-between items-center bg-[#A5DD9B]">
+        <header className="h-20 px-5 flex justify-between items-center bg-[#A5DD9B] text-black">
             <div>
                 <h3 className="text-xl font-semibold">
                     Welcome{user?.displayName ? ", " + user.displayName : ""}
