@@ -78,7 +78,7 @@ function Dialog({ note, handleDialogClose, handleNoteUpdate }: Props) {
                     />
                     <div className="flex justify-end">
                         <button
-                            className="text-sm hover:bg-slate-300 transition-colors rounded p-1"
+                            className="text-sm hover:bg-slate-300 hover:dark:bg-slate-900 transition-colors rounded p-1"
                             onClick={close}
                         >
                             Close
