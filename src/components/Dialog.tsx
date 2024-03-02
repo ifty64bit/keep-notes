@@ -47,7 +47,7 @@ function Dialog({ note, handleDialogClose, handleNoteUpdate }: Props) {
         >
             <LazyMotion features={domAnimation}>
                 <m.form
-                    className={`flex flex-col gap-2 max-w-md w-full p-4 rounded-md shadow-md text-lg`}
+                    className={`flex flex-col gap-2 dark:text-black  max-w-md w-full p-4 rounded-md shadow-md text-lg`}
                     key={"dialog"}
                     style={{ backgroundColor }}
                     onSubmit={handleFormSubmit}
@@ -78,7 +78,7 @@ function Dialog({ note, handleDialogClose, handleNoteUpdate }: Props) {
                     />
                     <div className="flex justify-end">
                         <button
-                            className="text-sm hover:bg-slate-300 hover:dark:bg-slate-900 transition-colors rounded p-1"
+                            className="text-sm hover:bg-slate-300 hover:dark:text-white hover:dark:bg-slate-900 transition-colors rounded p-1"
                             onClick={close}
                         >
                             Close
