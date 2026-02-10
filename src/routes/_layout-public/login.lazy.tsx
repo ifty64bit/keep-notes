@@ -1,4 +1,4 @@
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import Button from "../../components/Button";
 import { loginWithEmailPassword, loginWithGoogle } from "../../utils/firebase";
 import { toast } from "react-toastify";
@@ -18,59 +18,95 @@ function Login() {
         const password = form.get("password") as string;
 
         if (!email || !password) {
-            alert("All fields are required!");
+            toast.error("All fields are required!");
             return;
         }
 
         const user = await loginWithEmailPassword(email, password);
         if (user) {
-            navigate({
-                to: "/dashboard",
-            });
+            navigate({ to: "/dashboard" });
         } else {
             toast.error("Failed to login!");
         }
     }
 
     return (
-        <section className="flex flex-col md:flex-row gap-10 justify-center items-center min-h-screen">
-            <h3 className="text-5xl font-bold">
-                Get Into Your <br /> Note Vault Now!
-            </h3>
-            <div>
+        <section className="min-h-screen flex flex-col md:flex-row gap-12 justify-center items-center px-6 py-12">
+            {/* Heading */}
+            <div className="text-center md:text-left">
+                <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-surface-800">
+                    Welcome
+                    <br />
+                    <span className="text-gradient">Back!</span>
+                </h1>
+                <p className="mt-4 text-surface-500">
+                    Sign in to access your notes
+                </p>
+            </div>
+
+            {/* Form Card */}
+            <div className="w-full max-w-sm">
                 <form
+                    className="glass-card rounded-2xl p-6 space-y-4"
                     onSubmit={handleFormSubmit}
-                    className="[&_input]:border [&_input]:rounded-lg [&_input]:p-2 [&_div]:flex [&_div]:flex-col [&_div]:gap-2 space-y-4"
                 >
                     <div>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" />
+                        <label className="block text-sm font-medium text-surface-600 mb-1.5">
+                            Email
+                        </label>
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            className="input"
+                        />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <label className="block text-sm font-medium text-surface-600 mb-1.5">
+                            Password
+                        </label>
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="••••••••"
+                            className="input"
+                        />
                     </div>
-                    <div className="flex gap-4 items-start">
-                        <Button className="" type="submit">
-                            Login
-                        </Button>
-                        <Button
-                            type="button"
-                            icon={<GoogleIcon />}
-                            iconPosition="left"
-                            onClick={() => {
-                                loginWithGoogle()
-                                    .then(() =>
-                                        navigate({
-                                            to: "/dashboard",
-                                        })
-                                    )
-                                    .catch(console.error);
-                            }}
+
+                    <Button type="submit" variant="primary" className="w-full">
+                        Sign In
+                    </Button>
+
+                    <div className="relative flex items-center justify-center py-1">
+                        <div className="border-t border-surface-200 w-full" />
+                        <span className="absolute bg-white px-3 text-xs text-surface-400">
+                            or
+                        </span>
+                    </div>
+
+                    <Button
+                        type="button"
+                        variant="secondary"
+                        icon={<GoogleIcon className="w-5 h-5" />}
+                        iconPosition="left"
+                        className="w-full"
+                        onClick={async () => {
+                            const user = await loginWithGoogle();
+                            if (user) navigate({ to: "/dashboard" });
+                        }}
+                    >
+                        Continue with Google
+                    </Button>
+
+                    <p className="text-center text-sm text-surface-500">
+                        Don't have an account?{" "}
+                        <Link
+                            to="/signup"
+                            className="text-primary-600 font-medium hover:underline"
                         >
-                            Google
-                        </Button>
-                    </div>
+                            Sign up
+                        </Link>
+                    </p>
                 </form>
             </div>
         </section>

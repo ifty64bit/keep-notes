@@ -1,4 +1,6 @@
-function GoogleIcon() {
+type Props = React.SVGProps<SVGSVGElement>;
+
+function GoogleIcon(props: Props) {
     return (
         <svg
             viewBox="-3 0 262 262"
@@ -7,6 +9,7 @@ function GoogleIcon() {
             fill="#000000"
             width={25}
             height={25}
+            {...props}
         >
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g

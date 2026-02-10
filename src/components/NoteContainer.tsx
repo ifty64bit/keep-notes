@@ -3,7 +3,11 @@ type Props = {
 };
 
 function NoteContainer({ children }: Props) {
-    return <div className="flex gap-4 flex-wrap">{children}</div>;
+    return (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
+            {children}
+        </div>
+    );
 }
 
 export default NoteContainer;

@@ -4,16 +4,18 @@ import Header from "../components/Header";
 
 export const Route = createFileRoute("/_layout-private")({
     component: () => (
-        <>
-            <Header/>
-            <Outlet />
-        </>
+        <div className="min-h-screen bg-surface-50">
+            <Header />
+            <main className="pb-20">
+                <Outlet />
+            </main>
+        </div>
     ),
     beforeLoad: async () => {
         await auth.authStateReady();
         if (!auth.currentUser) {
             throw redirect({
-                to: "/login",
+                to: "/",
                 search: {
                     redirect: location.href,
                 },

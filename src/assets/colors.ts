@@ -1,10 +1,11 @@
+// Modern pastel note colors matching the theme system
 const colors = [
-    "#FBEAEA",
-    "#E6EAF9",
-    "#FBFAE5",
-    "#E8F6FA",
-    "#B7C9F2",
-    "#FFCFDF",
+    "oklch(0.92 0.05 350)", // Pink
+    "oklch(0.92 0.05 250)", // Blue
+    "oklch(0.95 0.06 90)", // Yellow
+    "oklch(0.93 0.05 160)", // Mint
+    "oklch(0.91 0.06 290)", // Lavender
+    "oklch(0.93 0.06 50)", // Peach
 ];
 
 function getRandomColor() {

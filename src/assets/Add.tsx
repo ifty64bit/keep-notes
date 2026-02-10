@@ -16,7 +16,7 @@ function Add(props: Props) {
                 <path
                     d="M7 12L12 12M12 12L17 12M12 12V7M12 12L12 17"
                     stroke="#000000"
-                    className="stroke-black dark:stroke-white"
+                    className="stroke-current"
                     strokeWidth="0.8399999999999999"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -25,7 +25,7 @@ function Add(props: Props) {
                     cx="12"
                     cy="12"
                     r="9"
-                    className="stroke-black dark:stroke-white"
+                    className="stroke-current"
                     strokeWidth="0.8399999999999999"
                     strokeLinecap="round"
                     strokeLinejoin="round"
