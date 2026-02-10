@@ -21,7 +21,7 @@
     },
     "devDependencies": {
         "@tanstack/router-devtools": "^1.159.5",
-        "@tanstack/router-vite-plugin": "^1.159.5",
+        "@tanstack/router-plugin": "^1.159.5",
         "@types/react": "^19.2.13",
         "@types/react-dom": "^19.2.3",
         "@typescript-eslint/eslint-plugin": "^8.55.0",
